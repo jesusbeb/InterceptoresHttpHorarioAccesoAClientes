@@ -10,8 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-//Registramos como componente Spring para inyectar posteriormente
-@Component
+//Registramos como componente Spring para inyectar posteriormente. Le damos nombre
+@Component("horarioInterceptor")
 public class HorarioInterceptor implements HandlerInterceptor {
 	
 	//Atributos para asignar los valores de application.properties
