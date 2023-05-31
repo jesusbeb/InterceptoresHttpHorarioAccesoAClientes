@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -57,9 +58,15 @@ public class HorarioInterceptor implements HandlerInterceptor {
 			ModelAndView modelAndView) throws Exception {
 		//obtenemos el mensaje
 		String mensaje = (String) request.getAttribute("mensaje");
-		//pasamos el mensaje a la vista, al modelAndView
-		//horario es el nombre con el que lo pasamos y lo capturaremos en la vista
-		modelAndView.addObject("horario", mensaje);
+		
+		//Validamos que modelAndView sea distinto de null y handler sea instancia de HandlerMethod
+		//con esto evitamos el error NullPointerException
+		if(modelAndView != null && handler instanceof HandlerMethod) {
+			//pasamos el mensaje a la vista, al modelAndView
+			//horario es el nombre con el que lo pasamos y lo capturaremos en la vista
+			modelAndView.addObject("horario", mensaje);
+		}
+		
 	}
 
 }
